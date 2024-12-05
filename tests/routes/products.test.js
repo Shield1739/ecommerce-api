@@ -52,12 +52,13 @@ describe('Product Routes', () => {
               })
           .expect(201);
       
-          expect(response.body.name).toEqual(name)
-          expect(response.body.price).toEqual(price)
-          expect(response.body.description).toEqual(description)
-          expect(response.body.inventory).toEqual(inventory)
-          expect(response.body.taxRate).toEqual(taxRate)
-          expect(response.body.categoryId).toEqual(category.id);
+          expect(response.body).toHaveProperty('id');
+          expect(response.body).toHaveProperty('name', name);
+          expect(response.body).toHaveProperty('price', price);
+          expect(response.body).toHaveProperty('description', description);
+          expect(response.body).toHaveProperty('inventory', inventory);
+          expect(response.body).toHaveProperty('taxRate', taxRate);
+          expect(response.body).toHaveProperty('categoryId', category.id);
       
     });
 
@@ -104,6 +105,7 @@ describe('Product Routes', () => {
             .get('/api/products/category/' + category1.id)
             .expect(200);
         
+        // TODO add better assert
         expect(response.body.length).toEqual(2);
     });
   });
